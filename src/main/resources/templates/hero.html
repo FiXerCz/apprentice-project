@@ -1,0 +1,42 @@
+{@com.hella.apprentice.project.pojos.Hero hero}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    {#include head.html}
+    {/include}
+</head>
+<body>
+
+    {#include header.html}
+    {/include}
+
+    <h1>Existing heroes</h1>
+
+    <div class="container-fluid">
+        <a href="/hero/import" class="big-button">Import from file</a>
+
+        <div class="grid">
+        {#for hero in heroes}
+            <div class="hero-card {hero.race}">
+                <span style="float: right;">{hero.race}</span>
+                <div class="hero-name">{hero.name}</div>
+                Hp: {hero.maxHp}<br/>
+                Attack: {hero.attack}<br/>
+                Defense: {hero.defense}<br/>
+                <div style="text-align: right"><a href="/hero/delete/{hero.name}" class="btn btn-danger">Delete</a></div>
+            </div>
+        {/for}
+        </div>
+
+        {#if heroes.size eq 0}
+        <div class="game-card gray">
+            <p class="text-center">No items.</p>
+        </div>
+        {/if}
+
+    </div>
+
+    {#include footer.html}
+    {/include}
+</body>
+</html>

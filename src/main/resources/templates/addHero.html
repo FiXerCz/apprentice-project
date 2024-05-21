@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {#include head.html}
+    {/include}
+</head>
+<body>
+    {#include header.html}
+    {/include}
+
+    <h1>Add hero</h1>
+
+    <div class="container-fluid">
+
+    <div class="game-card gray">
+        <div class="game-card-title">Enter hero stats</div>
+        <form method="post" action="/hero/add">
+            <div><label for="name">Name:</label> <input type="text" value="" id="name" name="name" required /></div>
+            <div><label for="hp">Hp:</label> <input type="number" value="0" id="hp" name="hp" required /></div>
+            <div><label for="defense">Defense:</label> <input type="number" value="0" name="defense" id="defense" required /></div>
+            <div><label for="attack">Attack:</label> <input type="number" value="0" name="attack" id="attack" required /></div>
+            <div><label for="race">Race:</label>
+            <select name="race" id="race">
+                <option>Human</option>
+                <option>Orc</option>
+                <option>Elf</option>
+                <option>Undead</option>
+            </select></div>
+            <button type="submit" value="Save" >Save</button>
+        </form>
+    </div>
+
+    </div>
+
+    {#include footer.html}
+    {/include}
+</body>
+</html>

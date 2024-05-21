@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {#include head.html}
+    {/include}
+</head>
+<body class="{#if !gameStarted}landing{/if}">
+    {#include header.html}
+    {/include}
+
+    {#if !gameStarted}
+
+        <div style="height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;">
+            <a href="/game/start" class="big-button">Start game</a>
+        </div>
+
+    {#else}
+
+    <h1>Tournament</h1>
+
+    <div class="container-fluid text-center">
+
+    <div class="game-card">
+        <div class="game-card-title">Heroes in the tournament</div>
+        <div class="grid-players">
+            {#for player in ranking}
+                <div class="hero-card {player.hero.race} {player.hero.isAlive() ? 'alive' : 'dead'}">
+                    <div class="hero-name">{player.hero.name}</div>
+                    Points: {player.points}
+                </div>
+            {/for}
+        </div>
+    </div>
+
+        {#for round in rounds}
+            <div class="game-card gray">
+                <div class="game-card-title">Round #{round_count}</div>
+                <div class="round-grid">
+                    {#for pair in round.getOpponents()}
+                    <div class="fighting-heroes">
+                    <div class="hero-card {pair.hero1.race} {#if pair.winner eq pair.hero1}winner{/if}">
+                        <span style="float: right;">{pair.hero1.race}</span>
+                        <div class="hero-name">{pair.hero1.name}</div>
+                        Hp: {pair.hero1.maxHp}<br/>
+                        Attack: {pair.hero1.attack}<br/>
+                        Defense: {pair.hero1.defense}<br/>
+                    </div>
+                    <div><img src="/swords.png" alt="VS" /></div>
+                    <div class="hero-card {pair.hero2.race} {#if pair.winner eq pair.hero2}winner{/if}">
+                        <span style="float: right;">{pair.hero2.race}</span>
+                        <div class="hero-name">{pair.hero2.name}</div>
+                        Hp: {pair.hero2.maxHp}<br/>
+                        Attack: {pair.hero2.attack}<br/>
+                        Defense: {pair.hero2.defense}<br/>
+                    </div>
+                    </div>
+                    {/for}
+                </div>
+            </div>
+        {/for}
+
+        {#if !gameFinished}
+        <a href="/game/play" class="big-button">Play next round</a>
+        {#else}
+        <a href="/game/start" class="big-button">Restart game?</a>
+        {/if}
+
+    {/if}
+
+    </div>
+
+
+    {#include footer.html}
+    {/include}
+</body>
+</html>
